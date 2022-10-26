@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from articles.models import Article
 from articles.serializers import ArticleSerializer
+# from rest_framework.decorators import api_view
+
 
 # Create your views here.
 
@@ -17,6 +19,8 @@ class ArticleList(APIView):
     
     def post(self, request, format=None):
         serializer = ArticleSerializer(data=request.data)
+        # 검증
+        # serializer.is_valid(raise_exception=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
